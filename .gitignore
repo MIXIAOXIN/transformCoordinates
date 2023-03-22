@@ -1,0 +1,6 @@
+main.py
+
+# compile files
+__pycache__
+.idea/
+.idea/*
