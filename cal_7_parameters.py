@@ -90,4 +90,27 @@ class Cal7Parameters():
         y2 = args[1] + (1 + args[6]) * (-args[5] * x1 + y1 + args[3] * z1)
         z2 = args[2] + (1 + args[6]) * (args[4] * x1 - args[3] * y1 + z1)
         return (x2, y2, z2)
+    '''
+    @brief: convert coordinates by the @params_in:args(7 parameters)
+    @:param_in: coors, [3, N]
+    @:return: converted coordinates, [3, N]
+    '''
+    def convertCoorninates(self, args, coors):
+        # roatetion:
+        r_matrix = [
+            [1, args[5], -args[4]],
+            [-args[5], 1, args[3]],
+            [args[4], -args[3], 1]
+        ]
+        r_matrix = np.array(r_matrix)
+        r_matrix *= (1+args[6])
+
+        coors_r = np.matmul(r_matrix, coors)
+        # translation:
+        t_matrix = [[args[0]], [args[1]], [args[2]]]
+        t_matrix = np.array(t_matrix)
+        t_matrix = t_matrix.repeat(coors.shape[1], axis=1)
+
+        coors_r += t_matrix
+        return coors_r
 
