@@ -38,12 +38,16 @@ class IO_PosT():
                 f.write(h)
             # write poses
             pose_to = []
-            if post_list == None:
+            if post_list is None:
                 pose_to = self.poses
             else:
                 pose_to = post_list
             for pos in pose_to:
-                str_out = ''.join(str(item) for item in pos)
+                for idx, item in enumerate(pos):
+                    if idx == 0:
+                        str_out = str(item)
+                    else:
+                        str_out += (" " + str(item))
                 str_out += '\n'
                 f.write(str_out)
         f.close()
@@ -53,13 +57,13 @@ class IO_PosT():
         # write X, Y, Z, T into file
         with open(filename, "w") as f:
             pose_to = []
-            if post_list == None:
+            if post_list is None:
                 pose_to = self.poses
             else:
                 pose_to = post_list
             # write xyzt in poses
             for pos in pose_to:
-                str_out = str() + ", " + str() + ", "+ str() + ", " + str()
+                str_out = str(pos[0]) + ", " + str(pos[1]) + ", "+ str(pos[2]) + ", " + str(pos[3])
                 str_out += '\n'
                 f.write(str_out)
         f.close()
