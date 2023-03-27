@@ -12,19 +12,20 @@ class IO_PosT():
         self.keys = []
         self.poses = []
 
-    def read_PosT(self, filename):
+    def read_PosT(self, filename, pos_start_rowid=25):
         # load data into lists, which are seperated by the "\n"
         my_file = open(filename, "r")
         data = my_file.read()
         data_into_list = data.split("\n")
         my_file.close()
 
-        self.hearders = data_into_list[0:2] # The first 21 lines are headers
-        self.keys = data_into_list[0]
-        self.poses = data_into_list[2:]
+        #pos_start_rowid = 25
+        self.hearders = data_into_list[0:pos_start_rowid] # The first 26 lines are headers
+        self.keys = data_into_list[pos_start_rowid-2]
+        self.poses = data_into_list[pos_start_rowid:]
 
         # extract values in each pose
-        self.poses = np.genfromtxt(filename, skip_header=2)
+        self.poses = np.genfromtxt(filename, skip_header=pos_start_rowid)
         # for idx in range(len(self.poses)):
         #     pos = self.poses[idx]
         #     self.poses[idx] = [item for item in pos.split('')]

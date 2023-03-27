@@ -67,9 +67,9 @@ if __name__=="__main__":
     #（2）： transform coordinates from system1 to system2
     #（3）： save PosT file or corresponding .txt file
     # origin_PosT_filename = "/media/mxx/MyPassport/zhangjiang-citysystem/@@2018-10-10-055907/POST/ReFinePOS.RePosT"
-    origin_PosT_filename = "/home/mxx/Desktop/ReFinePOS.RePosT"
+    origin_PosT_filename = "/media/mxx/My Passport/zhangjiang-citysystem/@@2018-10-13-030704/POST/ReFinePOS.RePosT"
     io_PosT = IO_PosT()
-    io_PosT.read_PosT(filename=origin_PosT_filename)
+    io_PosT.read_PosT(filename=origin_PosT_filename, pos_start_rowid=2)
     poses = io_PosT.get_poses()
     pos_origin = np.zeros((len(poses), 4))
     pos_transformed = []
