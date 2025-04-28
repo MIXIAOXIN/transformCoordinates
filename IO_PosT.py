@@ -54,7 +54,7 @@ class IO_PosT():
         f.close()
 
 
-    def write_XYZT(self, filename, post_list=None):
+    def write_XYZT(self, filename, post_list=None, x_col=0, y_col=1, z_col=2, t_col=3):
         # write X, Y, Z, T into file
         with open(filename, "w") as f:
             pose_to = []
@@ -64,7 +64,7 @@ class IO_PosT():
                 pose_to = post_list
             # write xyzt in poses
             for pos in pose_to:
-                str_out = str(pos[0]) + ", " + str(pos[1]) + ", "+ str(pos[2]) + ", " + str(pos[3])
+                str_out = str(pos[x_col]) + ", " + str(pos[y_col]) + ", "+ str(pos[z_col]) + ", " + str(pos[t_col])
                 str_out += '\n'
                 f.write(str_out)
         f.close()
